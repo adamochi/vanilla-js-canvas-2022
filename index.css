@@ -1,0 +1,13 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: darkcyan;
+}
+canvas {
+  background-color: rgb(232, 236, 240);
+  border: 5px solid rgb(123, 114, 250);
+  border-radius: 5px;
+  margin-top: 10px;
+}
