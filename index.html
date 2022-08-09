@@ -29,9 +29,12 @@
         <input type="color" id="color-custom" />
       </div>
       <div>
-        <button id="fill" class="random">Fill</button>
+        <div id="erase-n-fill">
+          <button id="fill" class="random">Fill</button>
+          <button id="whiteout" class="random">Eraser</button>
+        </div>
         <button id="random" class="random">Random Colour</button>
-        <button id="erase">Erase All</button>
+        <button id="erase" class="random">Delete All</button>
       </div>
     </div>
 
@@ -96,6 +99,10 @@
         style="background-color: #e67e22"
         data-color="#e67e22"
       ></div>
+    </div>
+    <div>
+      <!-- <input type="text" id="text" /> -->
+      <input type="file" id="file" accept="image/*" />
     </div>
 
     <script src="app.js"></script>

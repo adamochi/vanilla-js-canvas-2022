@@ -1,6 +1,9 @@
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
+// const textInput = document.getElementById("text");
+const addFile = document.getElementById("file");
+const whiteout = document.getElementById("whiteout");
 const eraseBtn = document.getElementById("erase");
 const fillBtn = document.getElementById("fill");
 const randomBtn = document.getElementById("random");
@@ -39,6 +42,7 @@ const colors = [
   "#7d5fff",
 ];
 ctx.lineWidth = linwidth.value;
+ctx.lineCap = "round";
 let isPainting = false;
 let isFilling = false;
 
@@ -107,7 +111,40 @@ const onCanvasClick = () => {
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
   }
 };
+const eraseAll = () => {
+  ctx.fillStyle = "whitesmoke";
+  ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+};
+const handleWhiteout = () => {
+  ctx.strokeStyle = "white";
+  isFilling = false;
+  fillBtn.innerText = "Fill";
+};
+const onAddFile = (e) => {
+  console.dir(e);
+  const file = e.target.files[0];
+  const url = URL.createObjectURL(file);
+  const image = new Image(); // same as doing <img src="" />
+  image.src = url;
+  image.onload = function () {
+    ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    addFile.value = null;
+  };
+};
+// canvasparty.onmousemove = onMove = () => {};
 
+// function onDoubleClick(event) {
+//   const text = textInput.value;
+//   if (text !== "") {
+//     ctx.save();
+//     ctx.lineWidth = 1;
+//     ctx.font = "68px 'Press Start 2P'";
+//     ctx.fillText(text, event.offsetX, event.offsetY);
+//     ctx.restore();
+//   }
+// }
+
+// canvas.addEventListener("dblclick", onDoubleClick);
 canvasparty.addEventListener("mousemove", onMove);
 canvasparty.addEventListener("mousedown", ondown);
 canvasparty.addEventListener("mouseup", stopDrawing);
@@ -118,6 +155,10 @@ randomBtn.addEventListener("click", randomColor);
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 fillBtn.addEventListener("click", onModeClick);
 canvasparty.addEventListener("click", onCanvasClick);
+eraseBtn.addEventListener("click", eraseAll);
+whiteout.addEventListener("click", handleWhiteout);
+addFile.addEventListener("change", onAddFile);
+
 /* some functions
 ctx.strokeRect(x:, y:, width, height);
 ctx.fillRect(300, 300, 5, 200);
