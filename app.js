@@ -1,7 +1,8 @@
-console.log("hello world");
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
+const eraseBtn = document.getElementById("erase");
+const fillBtn = document.getElementById("fill");
 const randomBtn = document.getElementById("random");
 const colourSelector = document.getElementById("color-custom");
 const linwidth = document.getElementById("line-width");
@@ -9,12 +10,21 @@ const canvasparty = document.getElementById("canvasparty");
 const greetingHeader = document.querySelector(".greeting");
 const sayhi = document.querySelector(".sayhi");
 const ctx = canvasparty.getContext("2d");
-canvasparty.height = 500;
-canvasparty.width = 800;
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 500;
+canvasparty.width = CANVAS_WIDTH;
+canvasparty.height = CANVAS_HEIGHT;
+
 const gday = () => {
-  greetingHeader.innerText = "G-day!";
+  if (greetingHeader.innerText === "Hello again") {
+    greetingHeader.innerText = "Hello forever!";
+  } else if (greetingHeader.innerText === "G-day!") {
+    greetingHeader.innerText = "Hello again";
+  } else {
+    greetingHeader.innerText = "G-day!";
+  }
 };
-greetingHeader.innerText = "hello";
+greetingHeader.innerText = "Paint JS 🎨 v.2022";
 sayhi.addEventListener("click", gday);
 
 const colors = [
@@ -30,6 +40,7 @@ const colors = [
 ];
 ctx.lineWidth = linwidth.value;
 let isPainting = false;
+let isFilling = false;
 
 const onMove = (event) => {
   if (isPainting) {
@@ -81,6 +92,22 @@ const onColorClick = (e) => {
   colourSelector.value = colorOpt;
 };
 
+const onModeClick = () => {
+  if (isFilling) {
+    isFilling = false;
+    fillBtn.innerText = "Fill";
+  } else {
+    isFilling = true;
+    fillBtn.innerText = "Draw";
+  }
+};
+
+const onCanvasClick = () => {
+  if (isFilling) {
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  }
+};
+
 canvasparty.addEventListener("mousemove", onMove);
 canvasparty.addEventListener("mousedown", ondown);
 canvasparty.addEventListener("mouseup", stopDrawing);
@@ -89,6 +116,8 @@ linwidth.addEventListener("change", onWidthChange);
 colourSelector.addEventListener("change", handleColorChoice);
 randomBtn.addEventListener("click", randomColor);
 colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
+fillBtn.addEventListener("click", onModeClick);
+canvasparty.addEventListener("click", onCanvasClick);
 /* some functions
 ctx.strokeRect(x:, y:, width, height);
 ctx.fillRect(300, 300, 5, 200);

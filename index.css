@@ -47,12 +47,13 @@ canvas {
   height: 70px;
   margin: 0;
 }
-#random {
+.random {
   font-size: 16px;
   font-weight: 600;
   border: none;
   background-color: whitesmoke;
   border-radius: 5px;
   height: fit-content;
-  padding: 5px 10px;
+  padding: 3px 10px;
+  margin: 5px;
 }
