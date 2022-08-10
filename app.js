@@ -1,7 +1,8 @@
 const colorOptions = Array.from(
   document.getElementsByClassName("color-option")
 );
-// const textInput = document.getElementById("text");
+const saveBtn = document.getElementById("saveBtn");
+const textInput = document.getElementById("text");
 const addFile = document.getElementById("file");
 const whiteout = document.getElementById("whiteout");
 const eraseBtn = document.getElementById("erase");
@@ -112,8 +113,10 @@ const onCanvasClick = () => {
   }
 };
 const eraseAll = () => {
+  ctx.save();
   ctx.fillStyle = "whitesmoke";
   ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  ctx.restore();
 };
 const handleWhiteout = () => {
   ctx.strokeStyle = "white";
@@ -129,22 +132,30 @@ const onAddFile = (e) => {
   image.onload = function () {
     ctx.drawImage(image, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     addFile.value = null;
-  };
+  }; // canvasparty.onmousemove = onMove = () => {};
 };
-// canvasparty.onmousemove = onMove = () => {};
 
-// function onDoubleClick(event) {
-//   const text = textInput.value;
-//   if (text !== "") {
-//     ctx.save();
-//     ctx.lineWidth = 1;
-//     ctx.font = "68px 'Press Start 2P'";
-//     ctx.fillText(text, event.offsetX, event.offsetY);
-//     ctx.restore();
-//   }
-// }
+function onDoubleClick(event) {
+  const text = textInput.value;
+  if (text !== "") {
+    ctx.save(); // whatever change between save and restore will not be remembered
+    ctx.lineWidth = 1;
+    ctx.font = "36px 'Press Start 2P'";
+    ctx.fillText(text, event.offsetX, event.offsetY);
+    // ctx.strokeText(text, event.offsetX, event.offsetY);
+    ctx.restore();
+  }
+}
 
-// canvas.addEventListener("dblclick", onDoubleClick);
+const onSaveClick = () => {
+  const url = canvasparty.toDataURL(); // <a href="" download
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "myDrawing🎨.png";
+  a.click();
+};
+
+canvasparty.addEventListener("dblclick", onDoubleClick);
 canvasparty.addEventListener("mousemove", onMove);
 canvasparty.addEventListener("mousedown", ondown);
 canvasparty.addEventListener("mouseup", stopDrawing);
@@ -158,6 +169,7 @@ canvasparty.addEventListener("click", onCanvasClick);
 eraseBtn.addEventListener("click", eraseAll);
 whiteout.addEventListener("click", handleWhiteout);
 addFile.addEventListener("change", onAddFile);
+saveBtn.addEventListener("click", onSaveClick);
 
 /* some functions
 ctx.strokeRect(x:, y:, width, height);

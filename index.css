@@ -1,23 +1,35 @@
+@import "reset.css";
+
 body {
+  overflow: hidden;
+  gap: 15px;
   color: aliceblue;
   font-family: Roboto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: darkcyan;
+  background-color: rgb(85, 85, 85);
+}
+h1 {
+  margin-top: 20px;
+  font-size: 36px;
 }
 canvas {
   background-color: rgb(232, 236, 240);
   border: 5px solid rgb(123, 114, 250);
-  border-radius: 5px;
+  border-radius: 10px;
   margin-top: 10px;
 }
 .controls {
-  width: 100%;
+  width: 700px;
   display: flex;
-  justify-content: center;
-  margin: 20px 0;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin: 10px 0;
+}
+.controls div {
+  width: 25%;
 }
 .controls h4 {
   margin: 0;
@@ -35,9 +47,12 @@ canvas {
 }
 .color-option {
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
+  box-shadow: 0 0 0 6px white;
+  margin: 0 3px;
+  /* border: 4px solid white; */
 }
 #color-custom {
   cursor: pointer;
@@ -50,25 +65,66 @@ canvas {
 }
 .random {
   cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   border: none;
-  background-color: whitesmoke;
+  background-color: rgb(244, 246, 252);
   border-radius: 5px;
   height: fit-content;
   padding: 3px 10px;
-  margin: 5px;
+}
+.random:active {
+  box-shadow: 0 0 0 2px cornflowerblue;
 }
 #erase-n-fill {
-  display: flex;
+  gap: 5px;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
+  width: 125px;
+  margin: 0 0 5px 0;
 }
-.erase-n-fill button {
-  margin: 0;
+#erase-n-fill button {
+  width: 50%;
+}
+.button-margin {
+  margin-bottom: 5px;
+}
+.text-upload-save-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px;
+}
+.text-upload-save-div * input {
+  background-color: white;
 }
 
+.text-upload-save-div * input:focus {
+  box-shadow: 0 0 0 2px white;
+  outline: none;
+}
+
+.text-upload-save-div h4 {
+  margin: 10px;
+}
+#file {
+  cursor: pointer;
+}
+#file::-webkit-file-upload-button {
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+#file::-webkit-file-upload-button:active {
+  background-color: rgb(0, 164, 214);
+}
+
+h4 {
+  word-spacing: 3px;
+}
+/* Just for the range input. . . */
 input[type="range"] {
   -webkit-appearance: none;
   margin: 18px 0;

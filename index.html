@@ -9,7 +9,7 @@
   </head>
   <body>
     <h1 class="greeting"></h1>
-    <button class="sayhi">say hi</button>
+    <button class="sayhi random">say hi</button>
     <canvas id="canvasparty"></canvas>
 
     <div class="controls">
@@ -29,11 +29,13 @@
         <input type="color" id="color-custom" />
       </div>
       <div>
+        <button id="random" class="random button-margin">Random Colour</button>
+      </div>
+      <div>
         <div id="erase-n-fill">
           <button id="fill" class="random">Fill</button>
           <button id="whiteout" class="random">Eraser</button>
         </div>
-        <button id="random" class="random">Random Colour</button>
         <button id="erase" class="random">Delete All</button>
       </div>
     </div>
@@ -100,9 +102,17 @@
         data-color="#e67e22"
       ></div>
     </div>
-    <div>
-      <!-- <input type="text" id="text" /> -->
+    <div class="text-upload-save-div">
+      <h4>Text Input:<h4>
+      <input
+        type="text"
+        class="random"
+        id="text"
+        placeholder="Write here then double click"
+      />
+      <h4>Upload Image 📷</h4>
       <input type="file" id="file" accept="image/*" />
+      <button id="saveBtn" class="random">Save 💾</button>
     </div>
 
     <script src="app.js"></script>
